@@ -11,7 +11,8 @@ router.route("/:id")
   .delete(articlesController.remove);
 
 //main html page
-router.route("/*")
-  .load("../../client/public/index.html")
+router.get('/*', function (req, res) {
+  res.sendFile("../../client/public/index.html");
+});
 
 module.exports = router;
