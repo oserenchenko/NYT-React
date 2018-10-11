@@ -1,1 +1,2 @@
-export { default } from "./Search";
+export * from "./Input";
+export * from "./Button";
