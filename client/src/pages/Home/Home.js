@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Input, Button } from "../../components/Search";
 import { Col, Row, Container } from "../../components/Grid";
+import Results from "../../components/Results"
+import Article from "../../components/Article"
 import API from "../../utils/APIS";
 
 class Home extends Component {
@@ -12,7 +14,6 @@ class Home extends Component {
   }
 
   loadArticles = () => {
-    console.log("whats up");
     console.log(this.state.articles)
   };
 
@@ -60,6 +61,25 @@ class Home extends Component {
         />
         <Button onClick={this.handleFormSubmit}>
         </Button>
+      </Col>
+    </Row>
+    <Row>
+      <Col size="md-12">
+      {this.state.articles.length ? (
+        <Results>
+          {this.state.articles.map(article => (
+          <Article
+          key={article._id}
+          title={article.headline.main}
+          url={article.web_url}
+          author={article.byline.original}
+          >
+          </Article>
+          ))}
+        </Results>
+      ) : (
+        <h3>No Results to Display</h3>
+      )}
       </Col>
     </Row>
   </Container>
