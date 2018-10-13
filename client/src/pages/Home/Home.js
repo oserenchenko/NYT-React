@@ -3,6 +3,7 @@ import { Input, Button } from "../../components/Search";
 import { Col, Row, Container } from "../../components/Grid";
 import Results from "../../components/Results"
 import Article from "../../components/Article"
+import Savebtn from "../../components/Savebtn"
 import API from "../../utils/APIS";
 
 class Home extends Component {
@@ -31,6 +32,20 @@ class Home extends Component {
         .then(res => this.setState({ articles: res.data.response.docs, topic: "", startYr: "", endYr: "" }, this.loadArticles))
         .catch(err => console.log(err));
     }
+  };
+
+  saveArticle = (event) => {
+    console.log("saving article");
+    const articleData = {
+      title: event.target.getAttribute("title"),
+      author: event.target.getAttribute("author"),
+      date: event.target.getAttribute("date"),
+      url: event.target.getAttribute("url")
+    }
+    API.saveArticle(articleData)
+    // .then(res => this.loadArticles())
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   };
 
   render() {
@@ -68,17 +83,29 @@ class Home extends Component {
       {this.state.articles.length ? (
         <Results>
           {this.state.articles.map(article => (
+          <div key={article._id}>
           <Article
-          key={article._id}
           title={article.headline.main}
-          url={article.web_url}
           author={article.byline.original}
+          date={article.pub_date}
+          url={article.web_url}
           >
           </Article>
+          <Savebtn
+          title={article.headline.main}
+          author={article.byline.original}
+          date={article.pub_date}
+          url={article.web_url}
+          onClick={(event) => this.saveArticle(event)}
+          ></Savebtn>
+          </div>
           ))}
         </Results>
       ) : (
-        <h3>No Results to Display</h3>
+        <div>
+        <h2>Results</h2>
+        <p>No results to display, please search a topic.</p>
+        </div>
       )}
       </Col>
     </Row>

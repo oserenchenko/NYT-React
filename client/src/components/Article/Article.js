@@ -1,7 +1,7 @@
 import React from "react";
 
 const Article = (props) => (
-<div>
+<div key={props.key}>
   <p>{props.title}</p>
   <p>{props.url}</p>
   <p>{props.author}</p>
