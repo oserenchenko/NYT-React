@@ -4,18 +4,27 @@ import { Col, Row, Container } from "../../components/Grid";
 import Results from "../../components/Results"
 import Article from "../../components/Article"
 import Savebtn from "../../components/Savebtn"
+import Saved from "../../components/Saved"
 import API from "../../utils/APIS";
 
 class Home extends Component {
   state = {
     articles: [],
+    saved: [],
     topic: "",
     startYr: "",
     endYr: ""
   }
 
+  componentDidMount() {
+    this.loadArticles();
+  };
+
   loadArticles = () => {
-    console.log(this.state.articles)
+      API.loadArticles()
+      .then(res =>
+        this.setState({ saved: res.data}))
+      .catch(err => console.log(err))
   };
 
   handleInputChange = event => {
@@ -43,8 +52,7 @@ class Home extends Component {
       url: event.target.getAttribute("url")
     }
     API.saveArticle(articleData)
-    // .then(res => this.loadArticles())
-    .then(res => console.log(res))
+    .then(res => this.loadArticles())
     .catch(err => console.log(err));
   };
 
@@ -107,6 +115,20 @@ class Home extends Component {
         <p>No results to display, please search a topic.</p>
         </div>
       )}
+      </Col>
+    </Row>
+    <Row>
+      <Col size="md-12">
+        {this.state.saved.map(saved => (
+            <Saved
+              key={saved._id}
+              title={saved.title}
+              author={saved.author}
+              date={saved.date}
+              url={saved.url}
+            >
+            </Saved>
+            ))}
       </Col>
     </Row>
   </Container>
