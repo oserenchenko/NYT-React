@@ -1,12 +1,11 @@
 import React from "react";
+import "./Saved.css";
 
 const Saved = (props) => (
 <div>
   {props.children}
-  <p>{props.title}</p>
-  <p>{props.author}</p>
-  <p>{props.date}</p>
-  <p>{props.url}</p>
+  <a href={props.url} target="_blank">{props.title}</a>
+  <p>{props.author} | {props.date}</p>
 </div>
 );
 

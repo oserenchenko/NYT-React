@@ -1,10 +1,10 @@
 import React from "react";
+import "./Article.css";
 
 const Article = (props) => (
 <div key={props.key}>
-  <p>{props.title}</p>
-  <p>{props.url}</p>
-  <p>{props.author}</p>
+  <a href={props.url} target="_blank">{props.title}</a>
+  <p className="author">{props.author} | {props.date}</p>
 </div>
 );
 

@@ -15,5 +15,11 @@ export default {
     // Saves an article to database
   loadArticles: function() {
     return axios.get("/api/articles");
-  } 
+  } ,
+
+    // deletes an article from database
+  deleteArticle: function(id) {
+    console.log(id);
+      return axios.delete("/api/articles/" + id);
+  }   
 };

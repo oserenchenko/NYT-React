@@ -1,7 +1,8 @@
 import React from "react";
+import "./results.css";
 
 const Results = (props) => (
-<div>
+<div className="results">
   <h2>Results</h2>
   {props.children}
 </div>

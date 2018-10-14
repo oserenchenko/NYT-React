@@ -1,0 +1,14 @@
+.box {
+  border: 2px solid rgb(156, 156, 206);
+  margin: 10px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, .75);
+}
+
+.btn-primary {
+  background-color: rgb(60, 60, 63);
+}
+
+.btn-primary:hover {
+  background-color: rgb(185, 184, 184);
+}
